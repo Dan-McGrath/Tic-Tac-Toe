@@ -1,3 +1,13 @@
+const Player = (name, letter) => {
+    const getName = () => name;
+    const getLetter = () => letter;
+    
+    return {getName, getLetter}
+}
+
+const player1 = Player('Player 1', 'X');
+const player2 = Player('Player 2', 'O');
+
 const gameboard = (() => {
     let boardArr = []; 
     let board = document.querySelector('.gameboard');
@@ -35,4 +45,5 @@ gameboard.createGameBoard()
 
 const gamemaster = {};
 
-const player = {};
+
+
