@@ -16,7 +16,9 @@ const gameboard = (() => {
         let index = e.target.dataset.index;
         let isOccupied = boardArr[index].occupied;
         if (isOccupied === 'false') {
-            e.target.textContent = 'O'
+            e.target.textContent = 'O'; // Temp input
+            boardArr[index].occupied = 'true';
+            e.target.dateset.occupied = 'true';
         } 
         return
     };
@@ -28,6 +30,7 @@ const gameboard = (() => {
             let square = document.createElement('div');
             square.classList.add('square')
             square.dataset.index = index;
+            square.dataset.occupied = 'false';
             square.addEventListener('click', playerInputHandler)
             board.appendChild(square);
             const spot = {
@@ -43,7 +46,12 @@ const gameboard = (() => {
 
 gameboard.createGameBoard()
 
-const gamemaster = {};
+const gamemaster = () => {
+    // figure out whose turn it is
+    // figure out if player won on this move
+    // if a player won announce winner
+    // clear game
+};
 
 
 
