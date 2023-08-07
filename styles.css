@@ -44,4 +44,18 @@ table {
 
 input {
   border-radius: 0;
+}
+
+.gameboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 1px black solid;
+  max-width: 80%;
+  margin: auto;
+}
+
+.square {
+  border: 1px black solid;
+  padding: 1rem;
 }/*# sourceMappingURL=styles.css.map */
