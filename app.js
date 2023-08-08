@@ -2,6 +2,7 @@ const Player = (name, letter) => {
     const getName = () => name;
     const getLetter = () =>  letter;
     
+    
     return {getName, getLetter}
 }
 
@@ -14,7 +15,9 @@ const gameboard = (() => {
 
     const createGameBoard = () => {
         //turn game board into 3 rows of divs
+        
         let index = 0;
+
         while (boardArr.length < 9) {
             let square = document.createElement('div');
             square.classList.add('square')
@@ -27,9 +30,6 @@ const gameboard = (() => {
             };
             boardArr.push(spot);
             index++;
-
-
-
         }
         return boardArr
     }
@@ -63,16 +63,12 @@ const gamemaster = () => {
         } 
         if (currentPlayer === player1 && isOccupied === 'false') {
             player1.playerMoves.push(Number(e.target.dataset.index));
-            if (findWinner() === true) {
-                console.log('Player 1 Wins!')
-            };
+            findWinner();
             currentPlayer = player2;
             
         } else {
             player2.playerMoves.push(Number(e.target.dataset.index));
-            if (findWinner() === true) {
-                console.log('Player 2 Wins!')
-            };
+            findWinner();
             currentPlayer = player1;
         }
         
@@ -105,7 +101,6 @@ const gamemaster = () => {
                         let winnerEle = document.querySelector('.winner');
                         winnerEle.textContent = `${winner} Wins!`
                         gameSquare.forEach(ele => ele.removeEventListener('click', playerInputHandler));
-                        reset()
                         return result
                     }
                 }
@@ -118,13 +113,29 @@ const gamemaster = () => {
     gameSquare.forEach(ele => ele.addEventListener('click', playerInputHandler));
 
     // clear game
+    const resetBtn = document.createElement('button');
+    resetBtn.classList.add('reset');
+    
+    resetBtn.textContent = 'Reset';
+
+    const buttonDiv = document.querySelector('.buttons');
+    buttonDiv.appendChild(resetBtn);
+
     const reset = () => {
-            player1.playerMoves = [];
-            player2.playerMoves = [];
-            gameboard.boardArr = [];
-            gameboard.board.innerHTML = '';
-            gameboard.board = gameboard.createGameBoard();
-    }   
+        player1.playerMoves = [];
+        player2.playerMoves = [];
+        for (let i = 0; i < gameboard.boardArr.length; i++) {
+            gameboard.boardArr[i].occupied = 'false';
+            gameboard.boardArr[i].takenBy = '';
+        }
+        let square = document.querySelectorAll('.square');
+        square.forEach(ele => ele.dataset.occupied = 'false');
+        square.forEach(ele => ele.textContent = '');
+        square.forEach(ele => ele.addEventListener('click', playerInputHandler));
+        let winnerEle = document.querySelector('.winner');
+        winnerEle.textContent = '';
+    }
+    resetBtn.addEventListener('click', reset);
 };
 
 gamemaster();
