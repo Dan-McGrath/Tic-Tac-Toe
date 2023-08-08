@@ -99,6 +99,8 @@ const gamemaster = () => {
                     if (result === true) {
                         let winner = currentPlayer.getName();
                         let winnerEle = document.querySelector('.winner');
+                        let winnerBanner = document.querySelector('.winner-banner');
+                        winnerBanner.dataset.active = 'true';
                         winnerEle.textContent = `${winner} Wins!`
                         gameSquare.forEach(ele => ele.removeEventListener('click', playerInputHandler));
                         return result
@@ -133,7 +135,11 @@ const gamemaster = () => {
         square.forEach(ele => ele.textContent = '');
         square.forEach(ele => ele.addEventListener('click', playerInputHandler));
         let winnerEle = document.querySelector('.winner');
+        let winnerBanner = document.querySelector('.winner-banner');
+        winnerBanner.dataset.active = false;
         winnerEle.textContent = '';
+        
+
     }
     resetBtn.addEventListener('click', reset);
 };
