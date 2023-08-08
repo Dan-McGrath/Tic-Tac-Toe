@@ -88,9 +88,22 @@ const gamemaster = () => {
             [2, 4, 6]
         ]
 
+        const checkDraw = () => {
+            let occupiedCount = 0
+            
+            for(let i = 0; i < gameboard.boardArr.length; i++){
+                if (gameboard.boardArr[i].occupied === 'true') {
+                    occupiedCount++
+                }
+            }
+            if (occupiedCount >= 9) {
+                console.log('draw')
+            }
 
+        }
         // if a player won announce winner
         const checkWinner = () => {
+            
             let result = false;
             for(let i = 0; i < winConditions.length; i++) {
                 let playerMoves = currentPlayer.playerMoves;
@@ -104,11 +117,14 @@ const gamemaster = () => {
                         winnerEle.textContent = `${winner} Wins!`
                         gameSquare.forEach(ele => ele.removeEventListener('click', playerInputHandler));
                         return result
+                    } else {
+                        checkDraw()
                     }
                 }
             }
             return result     
-        }     
+        }
+             
         return checkWinner()
     } 
     
