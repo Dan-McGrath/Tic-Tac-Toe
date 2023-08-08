@@ -100,17 +100,17 @@ const gamemaster = () => {
 
             for(let i = 0; i < winConditions.length; i++) {
                 let playerMoves = currentPlayer.playerMoves;
-                console.log(playerMoves)
                 if (playerMoves.length >= 3) {
                     result = winConditions[i].every(ele => playerMoves.includes(ele));
                     if (result === true) {
-                        console.log(result)
+                        let winner = currentPlayer.getName();
+                        let winnerEle = document.querySelector('.winner');
+                        winnerEle.textContent = `${winner} Wins!`
+            
                         return result
                     }
                 }
-
             }
-            console.log(result)
             return result     
         }
         
