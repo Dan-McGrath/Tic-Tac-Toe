@@ -46,6 +46,11 @@ input {
   border-radius: 0;
 }
 
+h1 {
+  text-align: center;
+  margin: 2rem;
+}
+
 .gameboard {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -58,4 +63,23 @@ input {
 .square {
   border: 1px black solid;
   padding: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.winner-banner[data-active=true] {
+  position: absolute;
+  top: 45%;
+  background-color: hsla(0, 89%, 43%, 0.9);
+  width: 100%;
+  padding: 2rem;
+}
+.winner-banner[data-active=true] p {
+  text-align: center;
+  color: whitesmoke;
 }/*# sourceMappingURL=styles.css.map */
