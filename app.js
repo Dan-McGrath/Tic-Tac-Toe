@@ -33,7 +33,7 @@ const gameboard = (() => {
         }
         return boardArr
     }
-    return {createGameBoard, boardArr}
+    return {createGameBoard, boardArr, board}
 })();
 
 
@@ -42,7 +42,7 @@ const gamemaster = () => {
     //Start Game
     gameboard.createGameBoard()
     player1.playerMoves = [];
-    player2.playerMoves = [];
+    player2.playerMoves = [];;
 
     //player 1 goes first
     let currentPlayer = player1;
@@ -93,11 +93,9 @@ const gamemaster = () => {
         ]
 
 
-        
+        // if a player won announce winner
         const checkWinner = () => {
             let result = false;
-            
-
             for(let i = 0; i < winConditions.length; i++) {
                 let playerMoves = currentPlayer.playerMoves;
                 if (playerMoves.length >= 3) {
@@ -106,22 +104,27 @@ const gamemaster = () => {
                         let winner = currentPlayer.getName();
                         let winnerEle = document.querySelector('.winner');
                         winnerEle.textContent = `${winner} Wins!`
-            
+                        gameSquare.forEach(ele => ele.removeEventListener('click', playerInputHandler));
+                        reset()
                         return result
                     }
                 }
             }
             return result     
-        }
-        
+        }     
         return checkWinner()
-        
-        //console.log(gameboard.boardArr);
     } 
-    // if a player won announce winner
+    
     gameSquare.forEach(ele => ele.addEventListener('click', playerInputHandler));
-    //gameSquare.forEach(ele => ele.addEventListener('click', findWinner));
+
     // clear game
+    const reset = () => {
+            player1.playerMoves = [];
+            player2.playerMoves = [];
+            gameboard.boardArr = [];
+            gameboard.board.innerHTML = '';
+            gameboard.board = gameboard.createGameBoard();
+    }   
 };
 
 gamemaster();
