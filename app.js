@@ -53,7 +53,9 @@ const gamemaster = () => {
     const playerInputHandler = (e) => {
         let index = e.target.dataset.index;
         let isOccupied = gameboard.boardArr[index].occupied;
-        if (isOccupied === 'false') {
+        if (isOccupied === 'true') {
+            return
+        } else {
             e.target.textContent = currentPlayer.getLetter();
             gameboard.boardArr[index].occupied = 'true';
             e.target.dataset.occupied = 'true';
@@ -68,7 +70,9 @@ const gamemaster = () => {
             
         } else {
             player2.playerMoves.push(Number(e.target.dataset.index));
-            findWinner();
+            if (findWinner() === true) {
+                console.log('Player 2 Wins!')
+            };
             currentPlayer = player1;
         }
         
