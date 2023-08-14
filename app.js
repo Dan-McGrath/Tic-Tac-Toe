@@ -97,7 +97,10 @@ const gamemaster = () => {
                 }
             }
             if (occupiedCount >= 9) {
-                console.log('draw')
+                let winnerEle = document.querySelector('.winner');
+                let winnerBanner = document.querySelector('.winner-banner');
+                winnerBanner.dataset.active = 'true';
+                winnerEle.textContent = `Draw`
             }
 
         }
